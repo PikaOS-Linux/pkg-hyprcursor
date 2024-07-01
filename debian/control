@@ -7,6 +7,11 @@ Build-Depends: debhelper-compat (= 13),
                build-essential,
                cmake-extras,
                cmake,
+               libcairo2-dev,
+               libzip-dev,
+               librsvg2-dev,
+               libtomlplusplus-dev,
+               libhyprlang
 Rules-Requires-Root: no
 
 Package: libhyprcursor
@@ -14,11 +19,16 @@ Architecture: linux-any
 Depends:
          ${shlibs:Depends},
          ${misc:Depends},
-         hyprland,
-         qt6-wayland,
-         xdg-desktop-portal,
 Provides: hyprcursor (= ${binary:Version}),
-Description: The hyprland cursor format, library and utilities.
+Description: Libraries for the Hyprland cursor format, library and utilities.
+
+Package: hyprcursor-util
+Architecture: linux-any
+Depends:
+         ${shlibs:Depends},
+         ${misc:Depends},
+         libhyprcursor (= ${binary:Version}),
+Description: The Hyprland cursor format, library and utilities.
 
 Package: libhyprcursor-dev
 Architecture: linux-any
