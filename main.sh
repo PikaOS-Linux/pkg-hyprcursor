@@ -9,7 +9,7 @@ apt-get update
 # Dead PikaOS 3 Workaround
 wget http://archive.ubuntu.com/ubuntu/pool/universe/t/tomlplusplus/libtomlplusplus3t64_3.4.0+ds-0.2build1_amd64.deb
 wget http://archive.ubuntu.com/ubuntu/pool/universe/t/tomlplusplus/libtomlplusplus-dev_3.4.0+ds-0.2build1_amd64.deb
-apt-install -y ./*libtoml*.deb
+apt install -y ./*libtoml*.deb
 apt-get install libglib2.0-0=2.78.0-2 libglib2.0-bin=2.78.0-2 libglib2.0-dev-bin=2.78.0-2 -y --allow-downgrades
 
 # Clone Upstream
