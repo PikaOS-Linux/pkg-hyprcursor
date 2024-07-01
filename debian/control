@@ -11,7 +11,7 @@ Build-Depends: debhelper-compat (= 13),
                libzip-dev,
                librsvg2-dev,
                libtomlplusplus-dev,
-               libhyprlang
+               libhyprlang-dev
 Rules-Requires-Root: no
 
 Package: libhyprcursor
