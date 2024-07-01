@@ -12,6 +12,8 @@ override_dh_auto_configure:
 override_dh_install:
 	DESTDIR=debian/tmp cmake --install build
 	dh_install
+	rm -rfv debian/libhyprcursor/usr/lib/*/pkgconfig/hyprcursor.pc
+	rm -rfv debian/libhyprcursor/usr/bin/hyprcursor-util
 ## === End end of region ===
 
 ## This here will start the build:
