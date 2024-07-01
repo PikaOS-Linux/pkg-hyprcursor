@@ -2,11 +2,13 @@
 
 DEBIAN_FRONTEND=noninteractive
 
+set -e
+
 apt-get update
 
 # Clone Upstream
-git clone --recurse-submodules https://github.com/hyprwm/xdg-desktop-portal-hyprland.git -b v1.2.2
-cd xdg-desktop-portal-hyprland
+git clone --recurse-submodules https://github.com/hyprwm/hyprcursor -b v0.1.9
+cd hyprcursor
 cp -rvf ../debian ./
 
 # Get build deps

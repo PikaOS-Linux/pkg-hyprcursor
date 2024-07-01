@@ -13,7 +13,7 @@ SHARE = /usr/share
 srcdir = $(shell debian/scripts/get_pwd.sh)
 
 ## If building a singular package you can remove the number, and as you guessed you call upon it with $(pkgdir)
- pkgdir = $(srcdir)/debian/xdg-desktop-portal-hyprland
+ pkgdir = $(srcdir)/debian/hyprwayland-scanner
 
 ## === End end of region ===
 
@@ -59,33 +59,17 @@ srcdir = $(shell debian/scripts/get_pwd.sh)
 ## Note : overrides must be places above %:
 ## So here's a few examples:
 
-override_dh_build:
-	make all
-
 ## overriding dh_clean to make it not delete rust vendor files:
 #override_dh_clean:
 #	echo "disabled"
 
 ## overriding dh_auto_configure to add custom configs:
-#override_dh_auto_configure:
-#		$(srcdir)/configure -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_DATADIR=/usr/share -DCMAKE_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu -DBUILD_PLUGIN=OFF
-
-## overriding dh_install to install files to a package:
-override_dh_auto_install:
+override_dh_auto_configure:
+	cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu -B build
+	cmake --build build --config Release --target all
 
 override_dh_install:
-		mkdir -p $(pkgdir)/${LIBEXEC}
-		mkdir -p $(pkgdir)/${SHARE}
-		mkdir -p $(pkgdir)/usr/bin
-		mkdir -p $(pkgdir)/${SHARE}/dbus-1/services
-		mkdir -p $(pkgdir)/${LIBEXEC}/systemd/user
-		mkdir -p $(pkgdir)/${SHARE}/xdg-desktop-portal/portals
-		cp -f $(srcdir)/build/hyprland-share-picker/hyprland-share-picker $(pkgdir)/usr/bin/hyprland-share-picker
-		cp -f $(srcdir)/build/xdg-desktop-portal-hyprland $(pkgdir)/${LIBEXEC}/xdg-desktop-portal-hyprland
-		cp -f $(srcdir)/hyprland.portal $(pkgdir)/${SHARE}/xdg-desktop-portal/portals/hyprland.portal
-		sed "s|@libexecdir@|${LIBEXEC}|g" $(srcdir)/org.freedesktop.impl.portal.desktop.hyprland.service.in > $(pkgdir)/${SHARE}/dbus-1/services/org.freedesktop.impl.portal.desktop.hyprland
-		sed "s|@libexecdir@|${LIBEXEC}|g" $(srcdir)/contrib/systemd/xdg-desktop-portal-hyprland.service.in > $(pkgdir)/${LIBEXEC}/systemd/user/xdg-desktop-portal-hyprland.service
-		chmod 755 $(pkgdir)/${LIBEXEC}/xdg-desktop-portal-hyprland
+	DESTDIR=$(pkgdir) cmake --install build
 ## === End end of region ===
 
 ## This here will start the build:

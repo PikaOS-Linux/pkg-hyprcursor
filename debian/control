@@ -1,27 +1,15 @@
-Source: xdg-desktop-portal-hyprland
+Source: hyprcursor
 Section: main
 Priority: optional
 Maintainer: ferrreo <harderthanfire@gmail.com>
 Standards-Version: 4.6.1
 Build-Depends: debhelper-compat (= 13),
-               qt6-base-dev,
-               qt6-wayland-dev,
-               meson,
                build-essential,
-               ninja-build,
-               libpipewire-0.3-dev,
                cmake-extras,
-               libgbm-dev,
-               libdrm-dev,
                cmake,
-               wayland-protocols,
-               uuid-dev,
-               libinih-dev,
-               libsystemd-dev,
-               libsdbus-c++-dev,
 Rules-Requires-Root: no
 
-Package: xdg-desktop-portal-hyprland
+Package: libhyprcursor
 Architecture: linux-any
 Depends:
          ${shlibs:Depends},
@@ -29,13 +17,14 @@ Depends:
          hyprland,
          qt6-wayland,
          xdg-desktop-portal,
-Provides: xdg-desktop-portal-hyprland, xdg-desktop-portal-backend (= 1.7.1)
-Description: Desktop portal for hyprland
+Provides: hyprcursor (= ${binary:Version}),
+Description: The hyprland cursor format, library and utilities.
 
-Package: xdg-desktop-portal-hyprland-dev
+Package: libhyprcursor-dev
 Architecture: linux-any
 Depends:
          ${shlibs:Depends},
          ${misc:Depends},
-         xdg-desktop-portal-hyprland (= ${binary:Version}),
-Description: Development files for Desktop portal for hyprland
+         libhyprcursor (= ${binary:Version}),
+Provides: hyprcursor-dev (= ${binary:Version}),
+Description: Development files for The hyprland cursor format, library and utilities.
